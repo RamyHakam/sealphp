@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\HttpKernel;
 
 /**
  * simple function to render templates
@@ -41,6 +42,8 @@ $request = $request? $request : Request::createFromGlobals();
  */
 $routes = include __DIR__ . '/../src/router.php';
 
+$router =
+
 /**
  * contain the Request info
  * @var  RequestContext $context
@@ -56,10 +59,24 @@ $context->fromRequest($request);
  */
 $matcher = new UrlMatcher($routes, $context);
 
+/**
+ * @var  HttpKernel\Controller\ControllerResolver $controllerResolver
+ */
+$controllerResolver = new HttpKernel\Controller\ControllerResolver();
+
+/**
+ * @var  HttpKernel\Controller\ArgumentResolver $argumentResolver
+ */
+$argumentResolver = new HttpKernel\Controller\ArgumentResolver();
+
 try {
 
      //adding path data to the request
     $request->attributes->add($matcher->match($request->getPathInfo()));
+
+    $controller = $controllerResolver->getController($request);
+
+    $argument = $argumentResolver->getArguments($request, $controller);
 
      //create the response from route function
     $response= call_user_func($request->attributes->get('_controller'),$request);
