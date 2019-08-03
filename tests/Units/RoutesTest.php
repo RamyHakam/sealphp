@@ -33,6 +33,10 @@ class RoutesTest extends TestCase
     public function testIFAllRoutesExist()
     {
         foreach ($this->routes->all() as $key => $route) {
+
+            $render = $route->getDefault('_controller');
+
+            $this->assertTrue(is_callable($render));
             $this->assertFileExists(__DIR__."/../../src/pages/{$key}" . ".php");
         }
     }
