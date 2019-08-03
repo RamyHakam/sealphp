@@ -1,4 +1,7 @@
-# SealPHP
+# SealPHP 
+
+![Build Status](https://travis-ci.org/Z-Team-Pro/sealphp.svg?branch=master)
+
 
 SealPHP is a micro php framework for learning purposes
 
