@@ -12,7 +12,7 @@ class IndexTest extends \PHPUnit\Framework\TestCase
 
     public  function  testCanSendHelloMessage(){
 
-        $request = Request::create('/hello?name=RamyHakam');
+        $request = Request::create('/hello/RamyHakam');
         ob_start();
         include  __DIR__.'/../../web/index.php';
         $content = ob_get_clean();
