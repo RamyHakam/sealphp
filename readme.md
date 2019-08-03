@@ -16,8 +16,13 @@ composer require ramyhakam/sealphp
 ## Usage
 
 ```php
-// I will update this part after we improve the backbones 
+//For now you can test simple rouring 
+1- Create new page in src/pages
+2- Add new Route in router file "router.php" 
+3- Make sure the name of the file is the same as the route name
 ```
+You can see example in this [PR]('https://github.com/Z-Team-Pro/sealphp/pull/2')
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
