@@ -4,5 +4,5 @@
  * src/pages/helloWorld.php
  */
 
-$name = $request->get('name');
+$name = isset($name)? $name : 'World';
 echo "Hello {$name}";
