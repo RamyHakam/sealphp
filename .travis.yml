@@ -11,8 +11,3 @@ php:
 before_script:
   composer install
 script: composer test
-
-after_script:
-  echo "no tests erros"
-
-after_failure: echo "errors in tests"
