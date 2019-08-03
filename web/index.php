@@ -40,17 +40,22 @@ $context->fromRequest($request);
  */
 $matcher = new UrlMatcher($routes, $context);
 
+try {
 //import the list variables from the matcher result
-extract($matcher->match($request->getPathInfo()), EXTR_SKIP);
+    extract($matcher->match($request->getPathInfo()), EXTR_SKIP);
 
 //start internal buffering
-ob_start();
+    ob_start();
 
 //get the routing file
-include sprintf(__DIR__.'/../src/pages/%s.php', $_route);
+    include sprintf(__DIR__ . '/../src/pages/%s.php', $_route);
 
 //create the response form buffering data
-$response = new Response(ob_get_clean());
+    $response = new Response(ob_get_clean());
+
+}catch (Exception $exception){
+    $response = new Response('not found',404);
+}
 
 //send the response
 $response->send();
