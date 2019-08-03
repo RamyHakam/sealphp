@@ -14,6 +14,22 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 
 /**
+ * simple function to render templates
+ * @param $request
+ * @return Response
+ */
+function render_template($request)
+{
+    extract($request->attributes->all(), EXTR_SKIP);
+    ob_start();
+    include sprintf(__DIR__.'/../src/pages/%s.php', $_route);
+
+    return new Response(ob_get_clean());
+}
+
+
+
+/**
  * create a new Request if it is not passed from other files like test
  * @var Request $request
  */
@@ -41,17 +57,12 @@ $context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
 
 try {
-//import the list variables from the matcher result
-    extract($matcher->match($request->getPathInfo()), EXTR_SKIP);
 
-//start internal buffering
-    ob_start();
+     //adding path data to the request
+    $request->attributes->add($matcher->match($request->getPathInfo()));
 
-//get the routing file
-    include sprintf(__DIR__ . '/../src/pages/%s.php', $_route);
-
-//create the response form buffering data
-    $response = new Response(ob_get_clean());
+     //create the response from route function
+    $response= call_user_func($request->attributes->get('_controller'),$request);
 
 }catch (Exception $exception){
     $response = new Response('not found',404);
