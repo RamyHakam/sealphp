@@ -10,4 +10,8 @@ php:
    
 before_script:
   composer install
+
 script: composer test
+
+notifications:
+  slack: sealphp:fJ2kOihegByFzcKCgxKpVNNy
