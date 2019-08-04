@@ -16,7 +16,7 @@ composer require ramyhakam/sealphp
 ## Usage
 
 ```php
-//For now you can test simple rouring 
+//For now you can test simple routing 
 1- Create new Controller with index method
 2- Add new Route in router file "router.php" 
 ```
