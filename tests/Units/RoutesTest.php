@@ -7,6 +7,7 @@
 namespace Tests\units;
 
 
+use Controllers\ControllerLoader;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -23,7 +24,8 @@ class RoutesTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->routes = include __DIR__ . '/../../src/router.php';
+        $loader = new ControllerLoader();
+        $this->routes =$loader->loader();
 
     }
 

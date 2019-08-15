@@ -18,8 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Controller\\": "Controllers",
-            "App\\": "App"
+            "Controllers\\": "Controllers",
+            "App\\": "SealCore"
         }
     },
     "autoload-dev": {
