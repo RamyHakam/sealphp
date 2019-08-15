@@ -1,8 +1,8 @@
 <?php
 
-namespace  App\SealAPP\Interfaces;
+namespace  App\Interfaces;
 
-use Controller\SealAbstractController;
+use Controllers\SealAbstractController;
 
 /**
  * interface to create a new route
@@ -38,12 +38,17 @@ Interface RouteInterface
     public  function setRouteRequestArray(array  $data);
 
     /**
-     * @return bool
-     */
-    public  function  validateRoute() :bool ;
-
-    /**
+     * @param string $name
      * @return mixed
      */
-    public  function  registerRoute();
+    public  function  setRouteName(string $name);
+
+    public  function getRouteURL();
+
+    /**
+     * @return SealAbstractController
+     */
+    public  function getRouteController() :SealAbstractController;
+    public  function getRouteMethod();
+    public  function getRouteName();
 }

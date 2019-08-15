@@ -13,7 +13,7 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\HttpKernel;
-
+use Controllers\ControllerLoader;
 /**
  * simple function to render templates
  * @param $request
@@ -28,8 +28,6 @@ function render_template($request)
     return new Response(ob_get_clean());
 }
 
-
-
 /**
  * create a new Request if it is not passed from other files like test
  * @var Request $request
@@ -40,10 +38,8 @@ $request = $request? $request : Request::createFromGlobals();
  * contain the routes list
  * @var  RouteCollection $routes
  */
-$routes = include __DIR__ . '/../src/router.php';
-
-$router =
-
+$loader = new ControllerLoader();
+$routes = $loader->loader();
 /**
  * contain the Request info
  * @var  RequestContext $context
@@ -82,7 +78,7 @@ try {
     $response= call_user_func($request->attributes->get('_controller'),$request);
 
 }catch (Exception $exception){
-    $response = new Response('not found',404);
+    $response = new Response($exception->getMessage(),404);
 }
 
 //send the response

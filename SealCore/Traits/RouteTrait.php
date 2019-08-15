@@ -4,7 +4,7 @@
 namespace App\Traits;
 
 
-use App\SealAPP\Interfaces\RouteInterface;
+use App\Interfaces\RouteInterface;
 
 Trait RouteTrait
 {

@@ -1,17 +1,23 @@
 <?php
 
-namespace App\SealAPP\Routes\Models;
+namespace App\Models;
 
-use App\SealAPP\Interfaces\RouteInterface;
+use App\Interfaces\RouteInterface;
 use App\Traits\RouteTrait;
-use Controller\SealAbstractController;
+use Controllers\SealAbstractController;
 
+/**
+ * Route object for routes mapping
+ * Class Route
+ * @package App\Models
+ */
 class Route implements RouteInterface
 {
     use RouteTrait;
     private $routeURL;
     private $controller;
     private $dataArray;
+    private $routeName;
     private $method;
 
     public function setRouteURL($url)
@@ -23,6 +29,7 @@ class Route implements RouteInterface
     public function setRoutMethod($method)
     {
         $this->method = $method;
+        return $this;
     }
 
     public function setRouteController(SealAbstractController $controller)
@@ -37,17 +44,36 @@ class Route implements RouteInterface
         $this->dataArray = $data;
         return $this;
     }
-
-    public function validateRoute(): bool
+    public function setRouteName(string $name)
     {
-        $this->assertRouteMethod()
-
+        // TODO: Implement setRouteName() method.
+        $this->routeName = $name;
+        return $this;
     }
 
-    public function registerRoute()
+    public function getRouteURL()
     {
-        // TODO: Implement registerRoute() method.
-        global
+        // TODO: Implement getRouteURL() method.
+        return $this->routeURL;
     }
+
+    public function getRouteMethod()
+    {
+        // TODO: Implement getRouteMethod() method.
+        return $this->method;
+    }
+
+
+    public function getRouteController() :SealAbstractController
+    {
+        // TODO: Implement getRouteController() method.
+        return $this->controller;
+    }
+    public function getRouteName()
+    {
+        // TODO: Implement getRouteName() method.
+        return $this->routeName;
+    }
+
 
 }

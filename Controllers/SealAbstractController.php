@@ -1,12 +1,14 @@
 <?php
 
 
-namespace Controller;
+namespace Controllers;
 
+use App\Managers\RouteManager;
 use App\Models\RouteNotValidException;
 use App\Traits\RouteTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 /**
  * The main controller for each SealPHP route controller
  * Class SealAbstractController
@@ -15,11 +17,21 @@ use Symfony\Component\HttpFoundation\Response;
 abstract class SealAbstractController
 {
     use RouteTrait;
+
     protected  $routeUrl;
 
     protected  $method;
 
     protected  $dataArray;
+
+    protected  $routeManager;
+
+    public function __construct()
+    {
+        $this->routeManager = new RouteManager();
+    }
+
+
     /**
      * index
      * @param Request $request
@@ -30,21 +42,6 @@ abstract class SealAbstractController
     /**
      * @throws RouteNotValidException
      */
-    protected  function  registerRoute(){
-        $this->validateRoute();
-
-
-    }
-
-    /**
-     * @return bool
-     * @throws RouteNotValidException
-     */
-    protected  function  validateRoute(){
-       if($this->assertRouteMethod() & $this->assertRouteURL()){
-           return true;
-           }
-       throw new RouteNotValidException('Route Not valid please check route config',401);
-    }
+    abstract  function  registerRoute();
 
 }
